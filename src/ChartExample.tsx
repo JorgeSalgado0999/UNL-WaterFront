@@ -1,7 +1,7 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-export const ChartExample = () => {
+export const ChartBoxPlot = () => {
 	const options: any = {
 		chart: {
 			type: "boxPlot",
