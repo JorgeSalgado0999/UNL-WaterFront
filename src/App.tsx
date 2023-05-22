@@ -55,6 +55,8 @@ function App() {
 			y: [54, 59, 66, 71, 88],
 		},
 	]);
+	const [initialDate, setInitialDate] = useState<string>("");
+	const [endDate, setEndDate] = useState<string>("");
 
 	const {
 		isLoading,
@@ -96,10 +98,18 @@ function App() {
 			<div>
 				<h2>Water Report</h2>
 				<label htmlFor="">Initial Date</label>
-				<input type="date" />
+				<input type="date" onChange={(e) => setInitialDate(e.target.value)} />
 				<br />
 				<label htmlFor="">End Date</label>
-				<input type="date" />
+				<input type="date" onChange={(e) => setEndDate(e.target.value)} />
+				<br />
+				<button
+					onClick={() => {
+						console.log(initialDate, endDate);
+					}}
+				>
+					actualizar
+				</button>
 				<ChartBoxPlot data={boxPlotData} />
 			</div>
 		</div>
