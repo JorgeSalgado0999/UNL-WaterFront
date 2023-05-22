@@ -4,8 +4,9 @@ export const DataAPI = {
 	getBoxPlot: function (initialDate: string, finalDate: string) {
 		return api
 			.request({
-				url: `/api/daily/discharge_mean/`,
+				url: `/api/daily/discharge_monthlySummary/`,
 				method: "POST",
+				headers: {mode: "no-cors"},
 				data: {
 					sites: [
 						"06670500",
