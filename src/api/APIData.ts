@@ -24,8 +24,8 @@ export const DataAPI = {
 						"06627000",
 						"06620000",
 					],
-					start: "21 Oct 2020",
-					end: "28 Oct 2020",
+					start: initialDate,
+					end: finalDate,
 				},
 			})
 			.then((response: any) => {

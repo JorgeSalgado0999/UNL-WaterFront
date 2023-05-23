@@ -4,59 +4,32 @@ import {ChartBoxPlot} from "./ChartExample";
 import {Loader} from "./loader";
 import {DataAPI} from "./api";
 
+const monthNames = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
+];
+
 function App() {
-	const [boxPlotData, setBoxPlotData] = useState<any>([
-		{
-			x: "January",
-			y: [54, 66, 69, 75, 88],
-		},
-		{
-			x: "February",
-			y: [43, 65, 69, 76, 81],
-		},
-		{
-			x: "March",
-			y: [31, 39, 45, 51, 59],
-		},
-		{
-			x: "April",
-			y: [39, 46, 55, 65, 71],
-		},
-		{
-			x: "May",
-			y: [29, 31, 35, 39, 44],
-		},
-		{
-			x: "Junne",
-			y: [41, 49, 58, 61, 67],
-		},
-		{
-			x: "July",
-			y: [54, 59, 66, 71, 88],
-		},
-		{
-			x: "August",
-			y: [54, 59, 66, 71, 88],
-		},
-		{
-			x: "September",
-			y: [54, 59, 66, 71, 88],
-		},
-		{
-			x: "October",
-			y: [54, 59, 66, 71, 88],
-		},
-		{
-			x: "November",
-			y: [54, 59, 66, 71, 88],
-		},
-		{
-			x: "December",
-			y: [54, 59, 66, 71, 88],
-		},
-	]);
-	const [initialDate, setInitialDate] = useState<string>("");
-	const [endDate, setEndDate] = useState<string>("");
+	//data
+	const [data, setData] = useState<any>([]);
+	//dates
+	const [initialDate, setInitialDate] = useState<string>("21 Oct 2022");
+	const [inputInitialDate, setInputInitialDate] = useState<string>("");
+	//
+	const [endDate, setEndDate] = useState<string>("28 Oct 2023");
+	const [inputEndDate, setInputEndDate] = useState<string>("");
+	//refetch
+	const [refresh, setRefresh] = useState<boolean>(false);
 
 	const {
 		isLoading,
@@ -64,20 +37,11 @@ function App() {
 		isError,
 		error,
 	} = useQuery({
-		queryKey: [`data-boxPlot`, []],
-		queryFn: () => DataAPI.getBoxPlot("21 Oct 2020", "28 Oct 2020"),
+		queryKey: [`data-boxPlot`, [refresh]],
+		queryFn: () => DataAPI.getBoxPlot(initialDate, endDate),
 		onSuccess: (data: any) => {
 			console.log(data);
-			let newData: any = [];
-			data[0].values.map((element: any) => {
-				console.log(element);
-				newData.push({
-					x: element.month,
-					y: element.discharges,
-				});
-			});
-
-			setBoxPlotData(newData);
+			setData(data);
 		},
 		staleTime: 15 * (60 * 1000), // 15 mins
 		cacheTime: 20 * (60 * 1000), // 20 mins
@@ -98,19 +62,66 @@ function App() {
 			<div>
 				<h2>Water Report</h2>
 				<label htmlFor="">Initial Date</label>
-				<input type="date" onChange={(e) => setInitialDate(e.target.value)} />
+				<input
+					type="date"
+					value={inputInitialDate}
+					onChange={(e) => {
+						setInputInitialDate(e.target.value);
+						//TODO: bug con el uso horario, toma un día antes
+						// console.log("obj: ", e.target.value);
+						let date: Date = new Date(e.target.value);
+						// console.log("date: ", date);
+						let tempDate: string = `${date.getDate()} ${
+							monthNames[date.getMonth()]
+						} ${date.getFullYear()}`;
+						// console.log("tempDate:", tempDate);
+
+						setInitialDate(tempDate);
+					}}
+				/>
 				<br />
 				<label htmlFor="">End Date</label>
-				<input type="date" onChange={(e) => setEndDate(e.target.value)} />
+				<input
+					type="date"
+					value={inputEndDate}
+					onChange={(e) => {
+						setInputEndDate(e.target.value);
+						// console.log("obj: ", e.target.value);
+						let date: Date = new Date(e.target.value);
+						// console.log("date: ", date);
+						let tempDate: string = `${date.getDate()} ${
+							monthNames[date.getMonth()]
+						} ${date.getFullYear()}`;
+						// console.log("tempDate:", tempDate);
+
+						setEndDate(tempDate);
+					}}
+				/>
 				<br />
 				<button
 					onClick={() => {
-						console.log(initialDate, endDate);
+						// console.log(initialDate, endDate);
+						setRefresh(!refresh);
 					}}
 				>
 					actualizar
 				</button>
-				<ChartBoxPlot data={boxPlotData} />
+				{data.map((chartData: any, index: number) => {
+					let newData: any = [];
+					chartData.values.map((element: any) => {
+						// console.log(element);
+						newData.push({
+							x: element.month,
+							y: element.discharges,
+						});
+					});
+					return (
+						<div key={index}>
+							<h2>{chartData.siteName}</h2>
+							<ChartBoxPlot data={newData} />
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
