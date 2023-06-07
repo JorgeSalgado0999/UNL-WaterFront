@@ -5,52 +5,60 @@ interface Props {
 }
 
 export const LineChartPlot = (props: Props) => {
-	let dischargesArray = props.data[0].y;
-	let percentagesArray: any = [];
-	let start = 100;
-	let count = start / (dischargesArray.length - 1);
-	let i = 0;
-
-	dischargesArray.sort((a: any, b: any) => {
-		if (Number(a) < Number(b)) {
-			return 1;
-		}
-
-		if (Number(a) > Number(b)) {
-			return -1;
-		}
-
-		return 0;
-	});
-
-	dischargesArray.forEach((discharge: any) => {
-		percentagesArray.push(Math.round(100 - count * i));
-		i++;
-	});
-
 	const options: any = {
 		chart: {
 			type: "line",
 			width: 350,
+			height: 400,
+			zoom: {
+				enabled: true,
+			},
 		},
-		xaxis: {
-			categories: percentagesArray,
+		dataLabels: {
+			enabled: true,
 		},
-		markers: {
-			size: 10,
+		title: {
+			text: "Product Trends by Month",
+			align: "left",
+		},
+		grid: {
+			row: {
+				colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+				opacity: 0.5,
+			},
 		},
 		stroke: {
 			curve: "smooth",
 		},
+		markers: {
+			size: 10,
+		},
+		xaxis: {
+			categories: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+		},
 	};
-	const data: any = [
+
+	const series: any = [
 		{
-			type: "line",
-			data: dischargesArray,
+			name: "one",
+			data: [10, 20, 45, 51, 49, 62, 69, 91, 148],
+		},
+		{
+			name: "two",
+			data: [10, 41, 35, 31, 49, 12, 69, 45, 123],
+		},
+		{
+			name: "three",
+			data: [10, 31, 55, 18, 90, 27, 29, 27, 7],
 		},
 	];
 
 	return (
-		<ReactApexChart options={options} series={data} type="line" height={350} />
+		<ReactApexChart
+			options={options}
+			series={series}
+			type="line"
+			height={350}
+		/>
 	);
 };

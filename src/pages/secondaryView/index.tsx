@@ -112,7 +112,7 @@ function SecondaryView() {
 							// console.log(initialDate, endDate);
 							setRefresh(!refresh);
 						}}
-						text="actualizar"
+						text="update"
 						full={false}
 					/>
 				</div>
