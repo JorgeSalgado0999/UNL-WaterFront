@@ -1,0 +1,77 @@
+@import "./fonts.css";
+@import "./spacings.css";
+
+:root {
+	/*colors*/
+	--black: #000;
+	--white: #fff;
+
+	--highlight: #4a4e5c; /*cambio 2c74bb*/
+	--main-color: var(--black); /*cambio 141a26*/
+	--gray: #eee;
+	--gray2: #d9d9d9;
+	--gray3: #5a5a5a;
+	--selectedTab: #4a4e5c;
+	--green: #04cc00;
+	--red: #d63944;
+
+	--background: #eeeeee;
+	--color-main: #0008cc;
+	--color-secondary: #0008cc;
+
+	/*Lead Colors*/
+	--cold-lead: #8dbdec;
+	--warm-lead: #eed347;
+	--hot-lead: #d63944;
+	--tracing-lead: #e08a08;
+	--messages: #dcf8c8;
+
+	/* Agency Colors */
+	--active-agency: #4fc24e;
+	--unactive-agency: #d4505d;
+
+	/*Text Colors*/
+	--main-text: #141a26;
+	/* --subtext: #5a5a5a; */
+	--secondary-text: #747474;
+	--highlight-text: #9d9ea0;
+	--link: #0069d1;
+
+	/* charts colors  */
+	--chart-green: #0d9d00;
+	--chart-blue: #8dbdec;
+	--chart-yellow: #eed347;
+	--chart-orange: #e07d08;
+	--chart-red: #e9525d;
+	--highlight2: #898a8d;
+
+	/* Border Radious */
+	--br-1: 0.5rem;
+	--br-2: 1rem;
+	--br-3: 2rem;
+}
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: inherit;
+	-moz-box-sizing: inherit;
+	box-sizing: inherit;
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+html {
+	font-size: 10px;
+	font-family: "Monserrat";
+}
+body {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	border: 0;
+	margin: 0;
+	font-weight: normal;
+	line-height: 2.5rem;
+}

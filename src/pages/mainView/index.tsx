@@ -3,6 +3,10 @@ import {useQuery} from "react-query";
 import {DataAPI} from "../../api";
 import {ChartBoxPlot} from "../../components/BoxPlot";
 import {Loader} from "../../components/loader";
+import {StyledInputDate} from "../../components/StyledInputs/StyledDate";
+import "./MainView.css";
+import "./../Shared.css";
+import {Button} from "../../components/button";
 
 const monthNames = [
 	"January",
@@ -43,16 +47,14 @@ function MainView() {
 			console.log(data);
 			setData(data);
 		},
-		staleTime: 15 * (60 * 1000), // 15 mins
-		cacheTime: 20 * (60 * 1000), // 20 mins
+		// staleTime: 15 * (60 * 1000), // 15 mins
+		// cacheTime: 20 * (60 * 1000), // 20 mins
 	});
 
 	if (isLoading) {
 		return (
-			<div className="row">
-				<div className={`col-xs-12 loaderContainer`}>
-					<Loader />
-				</div>
+			<div className="loader-container">
+				<Loader />
 			</div>
 		);
 	}
@@ -60,52 +62,60 @@ function MainView() {
 	return (
 		<div className="App">
 			<div>
-				<h2>Water Report</h2>
-				<label htmlFor="">Initial Date</label>
-				<input
-					type="date"
-					value={inputInitialDate}
-					onChange={(e) => {
-						setInputInitialDate(e.target.value);
-						//TODO: bug con el uso horario, toma un día antes
-						// console.log("obj: ", e.target.value);
-						let date: Date = new Date(e.target.value);
-						// console.log("date: ", date);
-						let tempDate: string = `${date.getDate()} ${
-							monthNames[date.getMonth()]
-						} ${date.getFullYear()}`;
-						// console.log("tempDate:", tempDate);
+				<h1 className="text-center">Water Report</h1>
 
-						setInitialDate(tempDate);
-					}}
-				/>
-				<br />
-				<label htmlFor="">End Date</label>
-				<input
-					type="date"
-					value={inputEndDate}
-					onChange={(e) => {
-						setInputEndDate(e.target.value);
-						// console.log("obj: ", e.target.value);
-						let date: Date = new Date(e.target.value);
-						// console.log("date: ", date);
-						let tempDate: string = `${date.getDate()} ${
-							monthNames[date.getMonth()]
-						} ${date.getFullYear()}`;
-						// console.log("tempDate:", tempDate);
+				<div className="filters">
+					<div className="inputs">
+						<div className="date-picker">
+							<label htmlFor="">Initial Date:</label>
+							<StyledInputDate
+								$customType="secondary"
+								value={inputInitialDate}
+								onChange={(e: any) => {
+									setInputInitialDate(e.target.value);
+									//TODO: bug con el uso horario, toma un día antes
+									// console.log("obj: ", e.target.value);
+									let date: Date = new Date(e.target.value);
+									// console.log("date: ", date);
+									let tempDate: string = `${date.getDate()} ${
+										monthNames[date.getMonth()]
+									} ${date.getFullYear()}`;
+									// console.log("tempDate:", tempDate);
 
-						setEndDate(tempDate);
-					}}
-				/>
-				<br />
-				<button
-					onClick={() => {
-						// console.log(initialDate, endDate);
-						setRefresh(!refresh);
-					}}
-				>
-					actualizar
-				</button>
+									setInitialDate(tempDate);
+								}}
+							/>
+						</div>
+						<div className="date-picker">
+							<label htmlFor="">End Date:</label>
+							<StyledInputDate
+								$customType="secondary"
+								value={inputEndDate}
+								onChange={(e: any) => {
+									setInputEndDate(e.target.value);
+									// console.log("obj: ", e.target.value);
+									let date: Date = new Date(e.target.value);
+									// console.log("date: ", date);
+									let tempDate: string = `${date.getDate()} ${
+										monthNames[date.getMonth()]
+									} ${date.getFullYear()}`;
+									// console.log("tempDate:", tempDate);
+
+									setEndDate(tempDate);
+								}}
+							/>
+						</div>
+					</div>
+					<Button
+						func={() => {
+							// console.log(initialDate, endDate);
+							setRefresh(!refresh);
+						}}
+						text="actualizar"
+						full={false}
+					/>
+				</div>
+
 				{data.map((chartData: any, index: number) => {
 					let newData: any = [];
 					chartData.values.map((element: any) => {

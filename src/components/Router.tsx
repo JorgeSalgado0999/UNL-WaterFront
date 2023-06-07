@@ -10,7 +10,7 @@ const Routing = () => {
 			<Routes>
 				<Route path="/" element={<MainTemplate />}>
 					<Route index path="" element={<MainView />}></Route>
-					<Route path="other" element={<SecondaryView />}></Route>
+					<Route path="secondary" element={<SecondaryView />}></Route>
 					<Route path="*" element={<NotFound />}></Route>
 				</Route>
 			</Routes>

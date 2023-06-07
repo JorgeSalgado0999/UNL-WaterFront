@@ -1,10 +1,11 @@
 import {Link} from "react-router-dom";
+import "./NavBar.css";
 
 const NavBar = () => {
 	return (
-		<nav style={{display: "flex", justifyContent: "space-around"}}>
-			<Link to="/home">Home</Link>
-			<Link to="/pets">Pets</Link>
+		<nav>
+			<Link to="/">Main</Link>
+			<Link to="/secondary">Secondary</Link>
 		</nav>
 	);
 };

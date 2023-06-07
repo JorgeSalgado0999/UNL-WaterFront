@@ -1,0 +1,36 @@
+.loader-container {
+	height: 90vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.filters {
+	margin-top: 2rem;
+	margin-bottom: 5rem;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.inputs {
+	display: flex;
+	gap: 3rem;
+}
+.date-picker {
+	display: flex;
+	gap: 1rem;
+}
+
+.date-picker label {
+	font-size: var(--p);
+	display: flex;
+	align-items: center;
+}
+.date-picker input {
+	margin-bottom: 0;
+}
+
+.date-picker {
+}

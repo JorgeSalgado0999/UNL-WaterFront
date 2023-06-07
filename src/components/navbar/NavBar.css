@@ -1,0 +1,27 @@
+nav {
+	background-color: #fff;
+
+	height: 5rem;
+	padding-top: 1rem;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.09);
+	margin-bottom: 1rem;
+}
+
+nav a {
+	font-size: var(--h5);
+	font-weight: 600;
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+}
+
+nav a:hover {
+	font-size: var(--p);
+	text-decoration: underline;
+	color: #feb019;
+}

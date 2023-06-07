@@ -1,12 +1,15 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
 import NavBar from "../navbar";
+import "./MainTemplate.css";
 
 const MainTemplate = () => {
 	return (
 		<div>
 			<NavBar />
-			<Outlet />
+			<div className="pages-content">
+				<Outlet />
+			</div>
 		</div>
 	);
 };
