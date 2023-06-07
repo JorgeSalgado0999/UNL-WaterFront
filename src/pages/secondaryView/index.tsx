@@ -43,9 +43,9 @@ function SecondaryView() {
 		error,
 	} = useQuery({
 		queryKey: [`data-boxPlot`, [refresh]],
-		queryFn: () => DataAPI.getBoxPlot(initialDate, endDate),
+		queryFn: () => DataAPI.getLineChart(initialDate, endDate),
 		onSuccess: (data: any) => {
-			console.log(data);
+			console.log("secondary:", data);
 			setData(data);
 		},
 		// staleTime: 15 * (60 * 1000), // 15 mins
@@ -122,8 +122,8 @@ function SecondaryView() {
 					chartData.values.map((element: any) => {
 						// console.log(element);
 						newData.push({
-							x: element.month,
-							y: element.discharges,
+							name: element.year,
+							data: element.discharges,
 						});
 					});
 					return (

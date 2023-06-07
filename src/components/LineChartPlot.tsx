@@ -56,7 +56,7 @@ export const LineChartPlot = (props: Props) => {
 	return (
 		<ReactApexChart
 			options={options}
-			series={series}
+			series={props.data}
 			type="line"
 			height={350}
 		/>
