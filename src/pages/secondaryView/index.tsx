@@ -28,10 +28,10 @@ function SecondaryView() {
 	//data
 	const [data, setData] = useState<any>([]);
 	//dates
-	const [initialDate, setInitialDate] = useState<string>("21 Oct 2022");
+	const [initialDate, setInitialDate] = useState<string>("21 Oct 2020");
 	const [inputInitialDate, setInputInitialDate] = useState<string>("");
 	//
-	const [endDate, setEndDate] = useState<string>("28 Oct 2023");
+	const [endDate, setEndDate] = useState<string>("28 Oct 2022");
 	const [inputEndDate, setInputEndDate] = useState<string>("");
 	//refetch
 	const [refresh, setRefresh] = useState<boolean>(false);
@@ -42,7 +42,7 @@ function SecondaryView() {
 		isError,
 		error,
 	} = useQuery({
-		queryKey: [`data-boxPlot`, [refresh]],
+		queryKey: [`data-lineChart`, [refresh]],
 		queryFn: () => DataAPI.getLineChart(initialDate, endDate),
 		onSuccess: (data: any) => {
 			console.log("secondary:", data);

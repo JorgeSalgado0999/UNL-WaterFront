@@ -15,10 +15,10 @@ export const LineChartPlot = (props: Props) => {
 			},
 		},
 		dataLabels: {
-			enabled: true,
+			enabled: false,
 		},
 		title: {
-			text: "Product Trends by Month",
+			text: "title",
 			align: "left",
 		},
 		grid: {
@@ -31,11 +31,11 @@ export const LineChartPlot = (props: Props) => {
 			curve: "smooth",
 		},
 		markers: {
-			size: 10,
+			size: 0,
 		},
-		xaxis: {
-			categories: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-		},
+		// xaxis: {
+		// 	categories: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+		// },
 	};
 
 	const series: any = [
