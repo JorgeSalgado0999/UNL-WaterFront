@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {Routes, Route, HashRouter} from "react-router-dom";
 import MainTemplate from "./template";
 import NotFound from "../pages/notFound";
 import MainView from "../pages/mainView";
@@ -6,7 +6,7 @@ import SecondaryView from "../pages/secondaryView";
 
 const Routing = () => {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
 				<Route path="/" element={<MainTemplate />}>
 					<Route index path="" element={<MainView />}></Route>
@@ -14,7 +14,7 @@ const Routing = () => {
 					<Route path="*" element={<NotFound />}></Route>
 				</Route>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	);
 };
 
