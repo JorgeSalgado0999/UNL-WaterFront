@@ -23,9 +23,11 @@ function createWindow() {
     icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      webSecurity: false
     },
     width: 1920,
-    height: 1080
+    height: 1080,
+    autoHideMenuBar: app.isPackaged,
   })
 
   // Test active push message to Renderer-process.
@@ -39,6 +41,7 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
+  
 }
 
 app.on('window-all-closed', () => {
