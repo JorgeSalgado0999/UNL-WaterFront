@@ -38,21 +38,6 @@ export const LineChartPlot = (props: Props) => {
 		// },
 	};
 
-	const series: any = [
-		{
-			name: "one",
-			data: [10, 20, 45, 51, 49, 62, 69, 91, 148],
-		},
-		{
-			name: "two",
-			data: [10, 41, 35, 31, 49, 12, 69, 45, 123],
-		},
-		{
-			name: "three",
-			data: [10, 31, 55, 18, 90, 27, 29, 27, 7],
-		},
-	];
-
 	return (
 		<ReactApexChart
 			options={options}
