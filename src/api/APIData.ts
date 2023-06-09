@@ -3,7 +3,7 @@ import { DailyValuesResponse } from "../models/usgs.models";
 import {api, API_ROUTE} from "./axiosConfig";
 import { generateDailyURL, getQuadrants, sortStringsAsNums } from "./util";
 
-const sites = [
+const sitesDef = [
 	"06670500",
 	"06657000",
 	"06656000",
@@ -21,7 +21,7 @@ const sites = [
 ]
 
 export const DataAPI = {
-	getBoxPlot: async function (initialDate: string, finalDate: string){
+	getBoxPlot: async function (initialDate: string, finalDate: string, sites?: string[]){
 		try {
 			const startDate = new Date(initialDate)
 			const endDate = new Date(finalDate)
@@ -29,7 +29,7 @@ export const DataAPI = {
 			startDate.setDate(startDate.getDate() + 1)
 			endDate.setDate(endDate.getDate() + 1)
 	
-			const url = generateDailyURL({endDate, startDate, sites, parameterCodes: ['00060'], statisticCodes: ['00003']})
+			const url = generateDailyURL({endDate, startDate, sites: sites || sitesDef, parameterCodes: ['00060'], statisticCodes: ['00003']})
 
 			const qRes = await api.request({url, method:'GET',headers: {mode: "no-cors"}})
 	
@@ -62,7 +62,7 @@ export const DataAPI = {
 			throw new Error(error);
 		}
 	},
-	getLineChart: async function (initialDate: string, finalDate: string) {
+	getLineChart: async function (initialDate: string, finalDate: string, sites?: string[]) {
 		try {
 			const startDate = new Date(initialDate)
 			const endDate = new Date(finalDate)
@@ -73,7 +73,7 @@ export const DataAPI = {
 			const startOfYear = new Date(startYear - 1, 10, 1);
 			const endOfYear =  new Date(endYear, 9, 30)
 		
-			const url = generateDailyURL({endDate: endOfYear, startDate: startOfYear, sites, parameterCodes: ['00060'], statisticCodes: ['00003']})
+			const url = generateDailyURL({endDate: endOfYear, startDate: startOfYear, sites: sites || sitesDef, parameterCodes: ['00060'], statisticCodes: ['00003']})
 			const qRes = await api.request({url, method:'GET',headers: {mode: "no-cors"}})
 			
 			if(!qRes.data) throw Error('No data returned')
