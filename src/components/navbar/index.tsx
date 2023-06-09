@@ -4,8 +4,8 @@ import "./NavBar.css";
 const NavBar = () => {
 	return (
 		<nav>
-			<Link to="/">Main</Link>
-			<Link to="/secondary">Secondary</Link>
+			<Link to="/">Whisker Chart</Link>
+			<Link to="/secondary">Flow Duration Curve</Link>
 		</nav>
 	);
 };

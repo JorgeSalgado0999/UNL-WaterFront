@@ -63,7 +63,7 @@ function SecondaryView() {
 	return (
 		<div className="App">
 			<div>
-				<h1 className="text-center">Title 2</h1>
+				<h1 className="text-center">Flow Duration Curve</h1>
 
 				<div className="filters">
 					<div className="inputs">
