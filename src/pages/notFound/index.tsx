@@ -1,11 +1,12 @@
 import React from "react";
 import "./NotFound.css";
+import { useLocation } from "react-router-dom";
 
 const NotFound = () => {
 	return (
 		<div className="background" id="NotFound">
 			<div className="top">
-				<h1 className="titleNF">404</h1>
+				<h1 className="titleNF">404{useLocation().pathname}</h1>
 				<h3 className="subTitleNF">page not found</h3>
 			</div>
 			<div className="container">

@@ -4,7 +4,7 @@ const API_ROUTE = Backend;
 
 const api = axios.create({
 	withCredentials: false,
-	baseURL: API_ROUTE,
+	baseURL: '//waterservices.usgs.gov/nwis/dv/?format=json'//API_ROUTE,
 });
 
 // defining a custom error handler for all APIs
