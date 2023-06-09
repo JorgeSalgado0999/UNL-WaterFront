@@ -7,6 +7,8 @@ import {StyledInputDate} from "../../components/StyledInputs/StyledDate";
 import "./MainView.css";
 import "./../Shared.css";
 import {Button} from "../../components/button";
+import { StyledTextArea } from "../../components/StyledTextArea";
+import { defaultSites } from "../../api/APIData";
 
 const monthNames = [
 	"January",
@@ -35,6 +37,9 @@ function MainView() {
 	//refetch
 	const [refresh, setRefresh] = useState<boolean>(false);
 
+	//
+	const [origins, setOrigins] = useState<string>(defaultSites.join(', '));
+
 	const {
 		isLoading,
 		data: leads,
@@ -42,7 +47,7 @@ function MainView() {
 		error,
 	} = useQuery({
 		queryKey: [`data-boxPlot`, [refresh]],
-		queryFn: () => DataAPI.getBoxPlot(initialDate, endDate),
+		queryFn: () => DataAPI.getBoxPlot(initialDate, endDate,  origins.replace(/[^\d,]+/g, '').split(',')),
 		onSuccess: (data: any) => {
 			console.log(data);
 			setData(data);
@@ -64,7 +69,18 @@ function MainView() {
 			<div>
 				<h1 className="text-center">Water Report</h1>
 
-				<div className="filters">
+				<div className="filters mt-2">
+					<div className="date-picker mr-2">
+						<label htmlFor="">Sites:</label>
+					</div>
+					<StyledTextArea
+						value={origins}
+						onChange={(e: any) => {
+							setOrigins(e.target.value);
+						}}
+					/>
+				</div>
+				<div className="filters mb-5">
 					<div className="inputs">
 						<div className="date-picker">
 							<label htmlFor="">Initial Date:</label>

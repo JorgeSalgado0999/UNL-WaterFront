@@ -8,6 +8,8 @@ import "./SecondaryView.css";
 import "./../Shared.css";
 import {Button} from "../../components/button";
 import {LineChartPlot} from "../../components/LineChartPlot";
+import { StyledTextArea } from "../../components/StyledTextArea";
+import { defaultSites } from "../../api/APIData";
 
 const monthNames = [
 	"January",
@@ -36,6 +38,9 @@ function SecondaryView() {
 	//refetch
 	const [refresh, setRefresh] = useState<boolean>(false);
 
+	//
+	const [origins, setOrigins] = useState<string>(defaultSites.join(', '));
+
 	const {
 		isLoading,
 		data: leads,
@@ -43,7 +48,7 @@ function SecondaryView() {
 		error,
 	} = useQuery({
 		queryKey: [`data-lineChart`, [refresh]],
-		queryFn: () => DataAPI.getLineChart(initialDate, endDate),
+		queryFn: () => DataAPI.getLineChart(initialDate, endDate, origins.replace(/[^\d,]+/g, '').split(',')),
 		onSuccess: (data: any) => {
 			console.log("secondary:", data);
 			setData(data);
@@ -65,7 +70,19 @@ function SecondaryView() {
 			<div>
 				<h1 className="text-center">Flow Duration Curve</h1>
 
-				<div className="filters">
+				<div className="filters mt-2">
+					<div className="date-picker mr-2">
+						<label htmlFor="">Sites:</label>
+					</div>
+							<StyledTextArea
+								value={origins}
+								onChange={(e: any) => {
+									setOrigins(e.target.value);
+								}}
+							/>
+				</div>
+
+				<div className="filters mb-5">
 					<div className="inputs">
 						<div className="date-picker">
 							<label htmlFor="">Initial Date:</label>
