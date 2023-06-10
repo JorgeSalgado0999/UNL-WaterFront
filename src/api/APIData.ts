@@ -4,6 +4,14 @@ import {api, API_ROUTE} from "./axiosConfig";
 import { generateDailyURL, getQuadrants, sortStringsAsNums } from "./util";
 
 export const defaultSites = [
+	"06620000",
+	"06630000",
+	"06635000",
+	"06657000",
+	"06670500",
+]
+
+const ids = [
 	"06670500",
 	"06657000",
 	"06656000",
@@ -18,7 +26,7 @@ export const defaultSites = [
 	"06630000",
 	"06627000",
 	"06620000",
-]
+] 
 
 export const DataAPI = {
 	getBoxPlot: async function (initialDate: string, finalDate: string, sites: string[]){
@@ -64,15 +72,18 @@ export const DataAPI = {
 	},
 	getLineChart: async function (initialDate: string, finalDate: string, sites: string[]) {
 		try {
+
 			const startDate = new Date(initialDate)
 			const endDate = new Date(finalDate)
+			console.log(startDate)
+			console.log(endDate)
 			
 			const startYear = startDate.getUTCFullYear()
 			const endYear = endDate.getUTCFullYear()
 		
-			const startOfYear = new Date(startYear - 1, 10, 1);
-			const endOfYear =  new Date(endYear, 9, 30)
-		
+			const startOfYear = new Date(startYear - 1, 9, 1);
+			const endOfYear =  new Date(endYear, 8, 30)
+
 			const url = generateDailyURL({endDate: endOfYear, startDate: startOfYear, sites, parameterCodes: ['00060'], statisticCodes: ['00003']})
 			const qRes = await api.request({url, method:'GET',headers: {mode: "no-cors"}})
 			
@@ -107,7 +118,9 @@ export const DataAPI = {
 				} 
 	
 				for(let year in yearly){
-					result[siteName].values.push({year, discharges: sortStringsAsNums(yearly[year])})
+					result[siteName].values.push({year, discharges: sortStringsAsNums(yearly[year]).filter(val => {
+						return Number(val) > 0 && val != null
+					})})
 				}
 	
 				
@@ -115,7 +128,7 @@ export const DataAPI = {
 	
 			return Object.values(result)
 		} catch (error: any) {
-			console.log("Hubo un error");
+			console.log("Error");
 			throw new Error(error);
 		}
 	},

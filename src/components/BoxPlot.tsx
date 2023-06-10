@@ -11,10 +11,10 @@ export const ChartBoxPlot = (props: Props) => {
 			type: "boxPlot",
 			height: 400,
 			colors: ["#008FFB", "#FEB019"],
-			title: {
-				text: "BoxPlot - Scatter Chart",
-				align: "left",
-			},
+			// title: {
+			// 	text: "BoxPlot - Scatter Chart",
+			// 	align: "left",
+			// },
 			xaxis: {
 				type: "datetime",
 				tooltip: {
@@ -48,10 +48,10 @@ export const ChartBoxPlot = (props: Props) => {
 				intersect: true,
 			},
 		},
-		title: {
-			text: "BoxPlot Chart",
-			align: "left",
-		},
+		// title: {
+		// 	text: "BoxPlot Chart",
+		// 	align: "left",
+		// },
 		plotOptions: {
 			boxPlot: {
 				colors: {

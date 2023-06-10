@@ -25,14 +25,49 @@ const monthNames = [
 	"December",
 ];
 
+const monthNamesShort = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"April",
+	"May",
+	"Jun",
+	"Jul",
+	"Aug",
+	"Sept",
+	"Oct",
+	"Nov",
+	"Dec",
+];
+
+function formatDate(date: any, first?: any) {
+	const day = String(date.getDate());
+	const month = String(date.getMonth());
+	const year = date.getFullYear();
+	return `${first || day} ${monthNamesShort[month]} ${year}`;
+  }
+  
+function getTwoMonthsBefore() {
+	const today = new Date();
+	const twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
+	return formatDate(twoMonthsAgo, 1);
+}
+  
+function addDay(day) {
+	const newDate = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1);
+	return newDate;
+}
+
 function MainView() {
 	//data
 	const [data, setData] = useState<any>([]);
 	//dates
-	const [initialDate, setInitialDate] = useState<string>("21 Oct 2022");
+	const [initialDate, setInitialDate] = useState<string>(getTwoMonthsBefore());
+
 	const [inputInitialDate, setInputInitialDate] = useState<string>("");
 	//
-	const [endDate, setEndDate] = useState<string>("28 Oct 2023");
+	const [endDate, setEndDate] = useState<string>(formatDate(new Date()));
+
 	const [inputEndDate, setInputEndDate] = useState<string>("");
 	//refetch
 	const [refresh, setRefresh] = useState<boolean>(false);
@@ -91,7 +126,7 @@ function MainView() {
 									setInputInitialDate(e.target.value);
 									//TODO: bug con el uso horario, toma un día antes
 									// console.log("obj: ", e.target.value);
-									let date: Date = new Date(e.target.value);
+									let date: Date = addDay(new Date(e.target.value));
 									// console.log("date: ", date);
 									let tempDate: string = `${date.getDate()} ${
 										monthNames[date.getMonth()]
@@ -110,7 +145,7 @@ function MainView() {
 								onChange={(e: any) => {
 									setInputEndDate(e.target.value);
 									// console.log("obj: ", e.target.value);
-									let date: Date = new Date(e.target.value);
+									let date: Date = addDay(new Date(e.target.value));
 									// console.log("date: ", date);
 									let tempDate: string = `${date.getDate()} ${
 										monthNames[date.getMonth()]
