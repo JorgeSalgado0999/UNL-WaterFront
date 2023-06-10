@@ -83,7 +83,7 @@ function SecondaryView() {
 		queryKey: [`data-lineChart`, [refresh]],
 		queryFn: () => DataAPI.getLineChart(initialDate, endDate, origins.replace(/[^\d,]+/g, '').split(',')),
 		onSuccess: (data: any) => {
-			console.log("secondary:", data);
+			// console.log("secondary:", data);
 			setData(data);
 		},
 		// staleTime: 15 * (60 * 1000), // 15 mins

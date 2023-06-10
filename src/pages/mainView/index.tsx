@@ -84,7 +84,7 @@ function MainView() {
 		queryKey: [`data-boxPlot`, [refresh]],
 		queryFn: () => DataAPI.getBoxPlot(initialDate, endDate,  origins.replace(/[^\d,]+/g, '').split(',')),
 		onSuccess: (data: any) => {
-			console.log(data);
+			// console.log(data);
 			setData(data);
 		},
 		// staleTime: 15 * (60 * 1000), // 15 mins

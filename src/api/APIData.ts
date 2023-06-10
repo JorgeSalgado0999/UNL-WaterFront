@@ -75,8 +75,6 @@ export const DataAPI = {
 
 			const startDate = new Date(initialDate)
 			const endDate = new Date(finalDate)
-			console.log(startDate)
-			console.log(endDate)
 			
 			const startYear = startDate.getUTCFullYear()
 			const endYear = endDate.getUTCFullYear()
