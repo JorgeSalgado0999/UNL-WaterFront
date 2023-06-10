@@ -42,7 +42,7 @@ const monthNamesShort = [
 
 function formatDate(date: any, first?: any) {
 	const day = String(date.getDate());
-	const month = String(date.getMonth());
+	const month = date.getMonth();
 	const year = date.getFullYear();
 	return `${first || day} ${monthNamesShort[month]} ${year}`;
   }
@@ -53,7 +53,7 @@ function getTwoMonthsBefore() {
 	return formatDate(twoMonthsAgo, 1);
 }
   
-function addDay(day) {
+function addDay(day:any) {
 	const newDate = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1);
 	return newDate;
 }
